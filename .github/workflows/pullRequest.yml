@@ -1,0 +1,17 @@
+name: test pull request action
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+
+jobs:
+  test_pr:
+    runs-on: ubuntu-latest 
+    steps:
+      - name: Check pr env info
+        env:
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_MERGE_SHA: ${{ github.event.pull_request.merge_commit_sha }}
+        run: |
+          echo "pr_head_sha: ${PR_HEAD_SHA}"
+          echo "pr_merge_sha: ${PR_MERGE_SHA}"
